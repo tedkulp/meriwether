@@ -1,4 +1,19 @@
 Meriwether::Application.routes.draw do
+  devise_for :users
+
+  resources :users, :only => [:index, :show]   do
+    member do
+      get :valid
+    end
+  end
+
+  resources :subdomains, :only => [:index, :show]
+  constraints(SubdomainRoute) do
+    match '/' => 'sites#index'
+  end
+  
+  root :to => "home#index"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

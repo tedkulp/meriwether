@@ -30,6 +30,7 @@ end
 
 gem "bson_ext", ">= 1.3.1"
 gem "mongoid", ">= 2.2.0"
+gem "devise"
 
 # Use unicorn as the web server
 # gem 'unicorn'

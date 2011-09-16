@@ -8,8 +8,8 @@ describe Subdomain do
   end
 
   it "should reject duplicate subdomain names" do
-    Factory(:subdomain)
-    sub_with_dup_name = Factory.build(:subdomain)
+    Factory(:subdomain, :name => 'test')
+    sub_with_dup_name = Factory.build(:subdomain, :name => 'test')
     sub_with_dup_name.should_not be_valid
   end
 

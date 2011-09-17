@@ -5,8 +5,7 @@ class Subdomain
   field :name, :type => String
   index :name, :unique => true
 
-  validates_presence_of :name
-  validates_uniqueness_of :name
+  validates :name, :presence => true, :uniqueness => true, :subdomain => true
   
   has_many :users
   belongs_to :created_by, :class_name => 'User'

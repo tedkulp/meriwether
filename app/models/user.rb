@@ -5,9 +5,11 @@ class User
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable
 
   belongs_to :subdomain
 
-  validates_presence_of :subdomain
+  validates :email, :presence => true, :uniqueness => { :scope => [:subdomain_id] }, :format => { :with => /\A[^@]+@([^@\.]+\.)+[^@\.]+\z/ }
+  validates :password, :presence => true, :confirmation => true, :length => { :within => 6..128 }
+  validates :subdomain, :presence => true
 end

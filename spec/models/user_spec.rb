@@ -27,10 +27,17 @@ describe User do
     end
   end
 
-  it "should reject duplicate email addresses" do
-    Factory(:user, :email => 'test@test.com')
+  it "should reject duplicate email addresses in the same subdomain" do
+    other_user = Factory(:user, :email => 'test@test.com')
     user_with_duplicate_email = Factory.build(:user, :email => 'test@test.com')
     user_with_duplicate_email.should_not be_valid
+  end
+
+  it "should allow duplicate email addresses if different subdomains" do
+    subdomains = FactoryGirl.create_list(:subdomain, 2)
+    first_user = Factory(:user, :email => 'test@test.com', :subdomain => subdomains[0])
+    user_with_duplicate_email = Factory.build(:user, :email => 'test@test.com', :subdomain => subdomains[1])
+    user_with_duplicate_email.should be_valid
   end
 
   it "should reject email addresses identical up to case" do

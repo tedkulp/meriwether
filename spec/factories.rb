@@ -24,7 +24,7 @@ FactoryGirl.define do
   factory :user do
     email { Factory.next(:email) }
     password 'please'
-    subdomain { Factory(:subdomain) }
+    subdomain { single_instances[:subdomain, {}] }
 
     factory :subdomain_owner do
     end

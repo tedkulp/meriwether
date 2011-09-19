@@ -18,6 +18,14 @@ end
 gem "jquery-rails"
 
 gem "rspec-rails", ">= 2.6.1", :group => [:development, :test]
+gem "guard", :group => [:development, :test]
+gem "guard-rspec", :group => [:development, :test]
+gem "guard-cucumber", :group => [:development, :test]
+
+if RUBY_PLATFORM.downcase.include?("darwin")
+  gem "rb-fsevent", :group => [:development, :test]
+  gem "growl_notify", :group => [:development, :test]
+end
 
 group :test do
   gem "database_cleaner", ">= 0.6.7"

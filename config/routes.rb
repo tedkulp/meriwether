@@ -1,4 +1,5 @@
 Meriwether::Application.routes.draw do
+
   devise_for :users
 
   resources :users, :only => [:index, :show]   do
@@ -9,9 +10,12 @@ Meriwether::Application.routes.draw do
 
   resources :subdomains, :only => [:index, :show]
   constraints(SubdomainRoute) do
-    match '/' => 'sites#index'
+    constraints(ValidSubdomainRoute) do
+      match '/' => 'home#index'
+    end
+    root :to => "home#invalid"
   end
-  
+
   root :to => "home#index"
 
   # The priority is based upon order of creation:

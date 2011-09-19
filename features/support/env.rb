@@ -49,3 +49,6 @@ end
 #     DatabaseCleaner.strategy = :transaction
 #   end
 #
+Before do
+  Capybara.default_host = 'example.com'
+end
